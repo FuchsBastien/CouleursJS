@@ -21,3 +21,12 @@ fond.style.background = `linear-gradient(${inclinaison}deg, ${valCouleurs})`;
 
 
 
+// Inclinaison
+
+inputRange.addEventListener('input', (e) => {
+    //*3.6 = inclinaison à 360 degrès 
+    inclinaison = e.target.value *3.6;
+    fond.style.background = `linear-gradient(${inclinaison}deg, ${valCouleurs})`;
+
+})
+
