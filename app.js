@@ -90,38 +90,73 @@ function rajouteEnleve(e){
     else if (e.target.className === "moins"){
         if (valCouleurs.length ===2) {
             span.innerText = 'il faut au moins deux couleurs !'
-        } else {
+        }
+        else {
             // pop = enlève la dernière valeur du tableau valCouleurs
             valCouleurs.pop()
             //on diminue les inputs de 1
             allInputs[allInputs.length-1].remove();
             //Mis à jour du fond
             fond.style.background = `linear-gradient(${inclinaison}deg, ${valCouleurs})`;
+            //permet d'enlever l'index de l'input supprimé
+            index--;
         }
     }  
 
+        // Mis à jour des inputs CREES
+        //ATTENTION LE DERNIER INPUT CREE AVEC LE BOUTON + NE PEUT ETRE MODIFIE
+        allInputs.forEach(inp => {
+            //pour chaque input qu'on modifie on applique la fonction MAJCOLORS
+            inp.addEventListener('input', MAJCOLORS);
+        });
+
+}
+
+  
+
+// Mis à jour des inputs DE BASE
+inputsCouleur.forEach(inp => {
+    inp.addEventListener('input', MAJCOLORS);
+});
+
+
+function MAJCOLORS(e){
+    //on prend l'index de l'input qu'on est en train de changer
+    let indexEnCours = e.target.getAttribute('data-index');
+    //on met en majuscule la valeur qu'on saisit
+    e.target.value = e.target.value.toUpperCase();
+    /*on va chercher dans le tableau des couleurs l'index de l'input qu'on est en train de changer
+    (-1 car commence à 0) et on l'associe à la valeur qu'on écrit*/
+    valCouleurs[indexEnCours - 1] = e.target.value.toUpperCase();
+    //on prend le background de ce qu'on saisit et on lui ajoute la valeur de ce qu'on a saisit
+    e.target.style.background = valCouleurs[indexEnCours - 1];
+    //on actualise le fond
+    fond.style.background = `linear-gradient(${inclinaison}deg, ${valCouleurs})`;
 }
 
 
-    // Couleurs aléatoires
 
-    btnRandom.addEventListener('click', () => {
-        //on reprend les inputs
-        const inputs = document.querySelectorAll('.inp-couleur');
-        //on parcourt le tableau des couleurs
-        for (i = 0 ; i < valCouleurs.length; i++) {
-            //on prend pour chaque couleur dans le tableau une couleur au hasard avec la valeur de randomColor
-            valCouleurs[i] = `#${Math.floor(Math.random()*16777215).toString(16)}`;
-            //pour chaque input on associe cette nouvelle couleur au hasard
-            inputs[i].value = valCouleurs[i].toUpperCase();
-              //pour chaque input on met le background de la nouvelle couleur
-            inputs[i].style.background = valCouleurs[i].toUpperCase();
-              //pour le fond on met le background du tableau
-            fond.style.background = `linear-gradient(${inclinaison}deg, ${valCouleurs})`;
-           
-        }
+// Couleurs aléatoires
 
-    })
+btnRandom.addEventListener('click', () => {
+    //on reprend les inputs
+    const inputs = document.querySelectorAll('.inp-couleur');
+    //on parcourt le tableau des couleurs
+    for (i = 0 ; i < valCouleurs.length; i++) {
+        //on prend pour chaque couleur dans le tableau une couleur au hasard avec la valeur de randomColor
+        valCouleurs[i] = `#${Math.floor(Math.random()*16777215).toString(16)}`;
+        //pour chaque input on associe cette nouvelle couleur au hasard
+        inputs[i].value = valCouleurs[i].toUpperCase();
+            //pour chaque input on met le background de la nouvelle couleur
+        inputs[i].style.background = valCouleurs[i].toUpperCase();
+            //pour le fond on met le background du tableau
+        fond.style.background = `linear-gradient(${inclinaison}deg, ${valCouleurs})`;
+        
+    }
+
+})
+
+
 
 
 
