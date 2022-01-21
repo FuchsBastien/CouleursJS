@@ -3,6 +3,7 @@ const fond = document.body;
 const inputRange = document.querySelector('.inp-range');
 const btns = document.querySelectorAll('button');
 const containerCouleurs = document.querySelector('.container-couleurs');
+const span = document.querySelector('span');
 
 
 // Démarrage
@@ -43,6 +44,8 @@ btns.forEach(btn => {
 });
 
 function rajouteEnleve(e){
+    //quand on reclique cela enlève le message
+    span.innerText = '';
 
     //on reprend le même que const inputsCouleur mais tous les inputs en plus des 2 de départ
     const allInputs = document.querySelectorAll('.inp-couleur');
@@ -78,11 +81,23 @@ function rajouteEnleve(e){
        //on rentre dans le tableau valCouleurs la nouvelle couleur aléatoire rajouté aux autres
        valCouleurs.push(`#${randomColor.toUpperCase()}`)
 
-       //le fond prend comme couleurs les nouvelles valeurs du tableau valCouleurs
+       //Mis à jour du fond
        fond.style.background = `linear-gradient(${inclinaison}deg, ${valCouleurs})`;
        //permet de rajouter un nouvel index au nouvel input
        index++;
-    
+    }
+    else if (e.target.className === "moins"){
+        if (valCouleurs.length ===2) {
+            span.innerText = 'il faut au moins deux couleurs !'
+        } else {
+            // pop = enlève la dernière valeur du tableau valCouleurs
+            valCouleurs.pop()
+            //on diminue les inputs de 1
+            allInputs[allInputs.length-1].remove();
+            //Mis à jour du fond
+            fond.style.background = `linear-gradient(${inclinaison}deg, ${valCouleurs})`;
+        }
+
     }  
 
 }
