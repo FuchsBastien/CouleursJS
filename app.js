@@ -4,6 +4,7 @@ const inputRange = document.querySelector('.inp-range');
 const btns = document.querySelectorAll('button');
 const containerCouleurs = document.querySelector('.container-couleurs');
 const span = document.querySelector('span');
+const btnRandom = document.querySelector('.random');
 
 
 // Démarrage
@@ -97,7 +98,30 @@ function rajouteEnleve(e){
             //Mis à jour du fond
             fond.style.background = `linear-gradient(${inclinaison}deg, ${valCouleurs})`;
         }
-
     }  
 
 }
+
+
+    // Couleurs aléatoires
+
+    btnRandom.addEventListener('click', () => {
+        //on reprend les inputs
+        const inputs = document.querySelectorAll('.inp-couleur');
+        //on parcourt le tableau des couleurs
+        for (i = 0 ; i < valCouleurs.length; i++) {
+            //on prend pour chaque couleur dans le tableau une couleur au hasard avec la valeur de randomColor
+            valCouleurs[i] = `#${Math.floor(Math.random()*16777215).toString(16)}`;
+            //pour chaque input on associe cette nouvelle couleur au hasard
+            inputs[i].value = valCouleurs[i].toUpperCase();
+              //pour chaque input on met le background de la nouvelle couleur
+            inputs[i].style.background = valCouleurs[i].toUpperCase();
+              //pour le fond on met le background du tableau
+            fond.style.background = `linear-gradient(${inclinaison}deg, ${valCouleurs})`;
+           
+        }
+
+    })
+
+
+
