@@ -1,10 +1,11 @@
-const inputsCouleur = document.querySelectorAll('.inp-couleur');
 const fond = document.body;
-const inputRange = document.querySelector('.inp-range');
-const btns = document.querySelectorAll('button');
 const containerCouleurs = document.querySelector('.container-couleurs');
-const span = document.querySelector('span');
+const inputsCouleur = document.querySelectorAll('.inp-couleur');
+const btns = document.querySelectorAll('button');
 const btnRandom = document.querySelector('.random');
+const inputRange = document.querySelector('.inp-range');
+const span = document.querySelector('span');
+
 
 
 // Démarrage
